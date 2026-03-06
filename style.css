@@ -1,0 +1,554 @@
+/* ================================================
+   NextFable — style.css
+   Full dark / light mode via .dark class on <html>
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+/* ─── Reset ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* ─── Typography ─── */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  transition: color 0.35s ease;
+}
+a { text-decoration: none !important; transition: all 0.3s ease; }
+
+/* ─── Nav link underline effect ─── */
+.nav-link {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(to right, rgb(167 139 250), rgb(236 72 153));
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+
+/* ─── Service card hover ─── */
+.service-card {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.service-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+}
+
+/* ─── Hero ─── */
+.hero-bg {
+  background: linear-gradient(-45deg, #1a0533, #2d0a4e, #0d0d1a, #1a0533);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── Sliding cards ─── */
+.sliding-cards-wrapper {
+  position: absolute;
+  top: 0; left: 0;
+  width: max-content;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  animation: slide 40s linear infinite;
+  will-change: transform;
+}
+.sliding-cards {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  height: 100%;
+}
+.card {
+  flex: 0 0 auto;
+  width: 340px;
+  height: 100%;
+  overflow: hidden;
+  border: none;
+  background: #000;
+}
+.card + .card { border-left: 3px solid rgba(0,0,0,0.4); }
+.card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.75;
+  display: block;
+}
+@keyframes slide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Hero glass overlay ─── */
+.hero-glass-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0,0,0,0.52);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* ─── Scroll indicator ─── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.scroll-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #fff;
+  text-shadow: 0 0 12px rgba(168,85,247,0.9), 0 0 24px rgba(168,85,247,0.5);
+  animation: labelFlash 2s ease-in-out infinite;
+}
+.scroll-line {
+  position: relative;
+  width: 2px; height: 52px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.scroll-dot {
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%);
+  width: 2px; height: 14px;
+  background: linear-gradient(to bottom, transparent, #a855f7, #fff);
+  border-radius: 2px;
+  animation: scrollDrop 1.8s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(168,85,247,0.9);
+}
+@keyframes scrollDrop {
+  0%   { top: -14px; opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { top: 52px; opacity: 0; }
+}
+@keyframes labelFlash {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+/* ─── Theme toggle button ─── */
+#theme-toggle {
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+#theme-toggle:hover { transform: rotate(20deg); }
+
+/* ─── Navbar base — always dark until light override ─── */
+nav {
+  background: rgba(9,9,11,0.88) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+}
+nav a.nav-link { color: rgba(255,255,255,0.80) !important; }
+nav a.nav-link:hover { color: #fff !important; }
+
+/* ─── Get Started button — gradient so it's always visible ─── */
+.btn-get-started {
+  background: linear-gradient(135deg, #7c3aed, #ec4899) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  border: none !important;
+  box-shadow: 0 0 20px rgba(124,58,237,0.3);
+}
+.btn-get-started:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 30px rgba(124,58,237,0.55) !important;
+}
+
+/* ================================================
+   DARK MODE  (default — html.dark)
+   ================================================ */
+
+html.dark body {
+  background-color: #09090b;
+  color: #f4f4f5;
+}
+
+/* Nav */
+html.dark nav {
+  background: rgba(9,9,11,0.88) !important;
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+html.dark nav a { color: rgba(255,255,255,0.80) !important; }
+html.dark nav a:hover { color: #fff !important; }
+html.dark #theme-toggle {
+  background: rgba(255,255,255,0.10) !important;
+  color: #f4f4f5 !important;
+}
+html.dark #theme-icon { color: #f4f4f5 !important; }
+
+/* Sections */
+html.dark .section-dark   { background-color: #09090b; }
+html.dark .section-mid    { background-color: #18181b; }
+html.dark .section-darker { background-color: #000000; }
+
+/* Cards / surfaces */
+html.dark .surface {
+  background-color: #27272a;
+  border-color: rgba(255,255,255,0.08);
+  color: #f4f4f5;
+}
+html.dark .surface-soft {
+  background-color: rgba(39,39,42,0.50);
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* Text helpers */
+html.dark .text-soft  { color: rgba(255,255,255,0.60); }
+html.dark .text-muted { color: rgba(255,255,255,0.40); }
+
+/* Form inputs */
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #27272a;
+  border-color: rgba(255,255,255,0.10);
+  color: #f4f4f5;
+}
+html.dark input::placeholder,
+html.dark textarea::placeholder { color: rgba(255,255,255,0.35); }
+html.dark input:focus,
+html.dark select:focus,
+html.dark textarea:focus {
+  border-color: #7c3aed;
+  outline: none;
+}
+
+/* Mobile menu */
+html.dark #mobile-menu {
+  background-color: #09090b;
+  border-color: rgba(255,255,255,0.08);
+}
+html.dark #mobile-menu a { color: rgba(255,255,255,0.85); }
+
+/* Footer */
+html.dark footer {
+  background-color: #000;
+  border-color: rgba(255,255,255,0.08);
+}
+html.dark footer a { color: rgba(255,255,255,0.55); }
+html.dark footer a:hover { color: #a78bfa; }
+
+/* Steps number boxes */
+html.dark .step-box {
+  background: rgba(255,255,255,0.08);
+  color: #f4f4f5;
+}
+
+/* Order form wrapper */
+html.dark .order-form-card {
+  background-color: #18181b;
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* ================================================
+   LIGHT MODE  (html — no .dark class)
+   ================================================ */
+
+html:not(.dark) body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Nav — light mode override */
+html:not(.dark) nav {
+  background: rgba(255,255,255,0.95) !important;
+  border-bottom-color: #e2e8f0 !important;
+  box-shadow: 0 1px 12px rgba(0,0,0,0.08) !important;
+}
+html:not(.dark) nav a.nav-link { color: #334155 !important; }
+html:not(.dark) nav a.nav-link:hover { color: #0f172a !important; }
+html:not(.dark) #theme-toggle {
+  background: rgba(0,0,0,0.07) !important;
+  color: #0f172a !important;
+}
+html:not(.dark) #theme-icon { color: #0f172a !important; }
+
+/* Sections */
+html:not(.dark) .section-dark   { background-color: #ffffff !important; }
+html:not(.dark) .section-mid    { background-color: #f1f5f9 !important; }
+html:not(.dark) .section-darker { background-color: #e2e8f0 !important; }
+
+/* Cards / surfaces */
+html:not(.dark) .surface {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+html:not(.dark) .surface-soft {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Text helpers */
+html:not(.dark) .text-soft  { color: #64748b !important; }
+html:not(.dark) .text-muted { color: #94a3b8 !important; }
+
+/* Tailwind opacity text overrides — covers text-white/XX used in HTML */
+html:not(.dark) [class*="text-white\/"] { color: #334155 !important; }
+html:not(.dark) .text-white { color: #0f172a !important; }
+
+/* Tailwind bg overrides — covers bg-zinc-XXX used in HTML */
+html:not(.dark) .bg-zinc-950  { background-color: #ffffff !important; }
+html:not(.dark) .bg-zinc-900  { background-color: #f1f5f9 !important; }
+html:not(.dark) .bg-zinc-800  { background-color: #ffffff !important; }
+html:not(.dark) section.bg-black,
+html:not(.dark) section[class~="bg-black"] { background-color: #e2e8f0 !important; }
+
+/* bg-white\/10 utility (step boxes, badges) */
+html:not(.dark) [class*="bg-white\/"] {
+  background-color: rgba(0,0,0,0.06) !important;
+}
+html:not(.dark) [class*="border-white\/"] {
+  border-color: rgba(0,0,0,0.12) !important;
+}
+
+/* Form inputs */
+html:not(.dark) input,
+html:not(.dark) select,
+html:not(.dark) textarea {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder { color: #94a3b8 !important; }
+html:not(.dark) input:focus,
+html:not(.dark) select:focus,
+html:not(.dark) textarea:focus {
+  border-color: #7c3aed !important;
+  outline: none;
+}
+
+/* Mobile menu */
+html:not(.dark) #mobile-menu {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+html:not(.dark) #mobile-menu a { color: #1e293b !important; }
+
+/* Footer stays dark always — good contrast */
+html:not(.dark) footer {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+html:not(.dark) footer a { color: rgba(226,232,240,0.65) !important; }
+html:not(.dark) footer a:hover { color: #a78bfa !important; }
+
+/* Headings in light mode */
+html:not(.dark) h1:not([class*="text-white"]),
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) h4 { color: #0f172a !important; }
+
+/* Paragraphs / list items */
+html:not(.dark) p:not([class*="text-white"]),
+html:not(.dark) li { color: #334155 !important; }
+
+/* Step boxes */
+html:not(.dark) .step-box {
+  background: rgba(0,0,0,0.07) !important;
+  color: #0f172a !important;
+}
+
+/* Order form wrapper */
+html:not(.dark) .order-form-card {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Service cards explicitly */
+html:not(.dark) .service-card {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Portfolio project cards */
+html:not(.dark) .project-card {
+  background-color: #ffffff !important;
+}
+html:not(.dark) .project-card p { color: #475569 !important; }
+
+/* Pricing cards */
+html:not(.dark) .pricing-card {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Contact section */
+html:not(.dark) #contact { background-color: #f1f5f9 !important; }
+html:not(.dark) #contact .fa-envelope,
+html:not(.dark) #contact .fa-phone { color: #7c3aed !important; }
+
+/* ================================================
+   ORDER PAGE — dark / light
+   ================================================ */
+
+/* Form card wrapper */
+html.dark  .order-card {
+  background: rgba(39,39,42,0.70);
+  border-color: rgba(255,255,255,0.08);
+}
+html:not(.dark) .order-card {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.07);
+}
+
+/* Section behind form */
+html.dark  .order-section  { background-color: #18181b; }
+html:not(.dark) .order-section { background-color: #f1f5f9 !important; }
+
+/* Form labels */
+html.dark  .form-label { color: rgba(255,255,255,0.70); }
+html:not(.dark) .form-label { color: #475569 !important; }
+
+/* Inputs / selects / textareas on Order page */
+html.dark  .form-input {
+  background-color: #09090b;
+  border-color: rgba(255,255,255,0.12);
+  color: #f4f4f5;
+}
+html.dark  .form-input::placeholder { color: rgba(255,255,255,0.30); }
+html.dark  .form-input:focus { border-color: #7c3aed; outline: none; }
+
+html:not(.dark) .form-input {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+html:not(.dark) .form-input::placeholder { color: #94a3b8 !important; }
+html:not(.dark) .form-input:focus { border-color: #7c3aed !important; outline: none; }
+
+/* Feature checkbox tiles */
+html.dark  .feature-tile {
+  background: rgba(9,9,11,0.50);
+  border-color: rgba(255,255,255,0.10);
+  color: #f4f4f5;
+}
+html.dark  .feature-tile:hover { border-color: #7c3aed; }
+
+html:not(.dark) .feature-tile {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+html:not(.dark) .feature-tile:hover { border-color: #7c3aed !important; }
+
+/* Footer on order page */
+html.dark  .order-footer { background-color: #000; border-color: rgba(255,255,255,0.06); }
+html:not(.dark) .order-footer { background-color: #1e293b !important; border-color: #1e293b !important; }
+
+/* Subtext below submit */
+html.dark  .submit-note { color: rgba(255,255,255,0.35); }
+html:not(.dark) .submit-note { color: #94a3b8 !important; }
+
+/* ================================================
+   SCROLL REVEAL ANIMATIONS
+   Classes applied by main.js, triggered by
+   IntersectionObserver on scroll down AND up
+   ================================================ */
+
+/* ── Base hidden state ── */
+.reveal {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    opacity  0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Direction variants ── */
+.reveal-up    { transform: translateY(48px); }
+.reveal-down  { transform: translateY(-48px); }
+.reveal-left  { transform: translateX(-56px); }
+.reveal-right { transform: translateX(56px); }
+.reveal-scale { transform: scale(0.88) translateY(24px); }
+
+/* ── Active = fully visible ── */
+.reveal.reveal-active {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Stagger helpers (optional manual use) ── */
+.reveal-delay-1 { transition-delay: 100ms !important; }
+.reveal-delay-2 { transition-delay: 200ms !important; }
+.reveal-delay-3 { transition-delay: 300ms !important; }
+.reveal-delay-4 { transition-delay: 400ms !important; }
+.reveal-delay-5 { transition-delay: 500ms !important; }
+
+/* ── Longer / slower variants for hero-adjacent elements ── */
+.reveal-slow {
+  transition-duration: 1s !important;
+}
+.reveal-fast {
+  transition-duration: 0.4s !important;
+}
+
+/* ── Navbar shrink transition (height animated) ── */
+nav {
+  transition:
+    background  0.35s ease,
+    border-color 0.35s ease,
+    box-shadow  0.35s ease,
+    height      0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ── Hero parallax content ── */
+.hero-bg .relative.z-10,
+.order-hero-bg .relative.z-10 {
+  transition: opacity 0.1s linear;
+  will-change: transform, opacity;
+}
+
+/* ── Floating WhatsApp button — bounce in ── */
+.fixed.bottom-8.right-8 {
+  animation: waBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s both;
+}
+@keyframes waBounce {
+  from { transform: scale(0) translateY(40px); opacity: 0; }
+  to   { transform: scale(1) translateY(0);    opacity: 1; }
+}
+
+/* ── Page load: body fade in ── */
+body {
+  animation: pageFadeIn 0.5s ease both;
+}
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

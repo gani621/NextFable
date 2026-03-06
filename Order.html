@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Your Website – NextFable</title>
+
+  <!-- Tailwind with dark-class mode -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared stylesheet (has all dark/light vars) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Anti-flash: apply saved theme before paint -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('nf_theme');
+      if (t === 'light') document.documentElement.classList.remove('dark');
+      else               document.documentElement.classList.add('dark');
+    })();
+  </script>
+
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+
+    /* Hero gradient — always colourful, not theme-dependent */
+    .order-hero-bg {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      background-size: 200% 200%;
+      animation: heroGrad 18s ease infinite;
+    }
+    @keyframes heroGrad {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen transition-colors duration-300">
+
+  <!-- ══════════════════════════════════════
+       NAVBAR — identical system to NextFable
+       ══════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b transition-all duration-300">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="flex items-center justify-between h-20">
+
+        <!-- Logo -->
+        <a href="NextFable.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl overflow-hidden bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950 shadow-lg shadow-purple-900/30">
+            <img src="72.jpg" alt="NextFable" class="h-[110%] object-contain">
+          </div>
+          <span class="text-2xl font-bold tracking-tight bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
+            NextFable
+          </span>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-x-10 text-sm font-medium">
+          <a href="NextFable.html#home"      class="nav-link">Home</a>
+          <a href="NextFable.html#services"  class="nav-link">Services</a>
+          <a href="NextFable.html#portfolio" class="nav-link">Portfolio</a>
+          <a href="NextFable.html#pricing"   class="nav-link">Pricing</a>
+          <a href="#"                        class="nav-link active text-violet-400">Order</a>
+          <a href="NextFable.html#contact"   class="nav-link">Contact</a>
+        </div>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-4">
+          <!-- Theme toggle -->
+          <button onclick="toggleTheme()" id="theme-toggle" aria-label="Toggle theme"
+            class="w-10 h-10 rounded-2xl flex items-center justify-center transition-all">
+            <i class="fa-solid fa-moon text-xl" id="theme-icon"></i>
+          </button>
+
+          <!-- Get in Touch -->
+          <a href="NextFable.html#contact"
+            class="btn-get-started hidden md:inline-flex px-6 py-3 rounded-xl font-medium">
+            Get in Touch
+          </a>
+
+          <!-- Mobile hamburger -->
+          <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 flex items-center justify-center text-2xl">
+            <i class="fa-solid fa-bars" id="hamburger"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t py-6 transition-all">
+      <div class="flex flex-col px-6 gap-y-5 text-lg font-medium">
+        <a href="NextFable.html#home"      class="py-2">Home</a>
+        <a href="NextFable.html#services"  class="py-2">Services</a>
+        <a href="NextFable.html#portfolio" class="py-2">Portfolio</a>
+        <a href="NextFable.html#pricing"   class="py-2">Pricing</a>
+        <a href="#"                        class="py-2 text-violet-400">Order</a>
+        <a href="NextFable.html#contact"   class="py-2">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════
+       HERO
+       ══════════════════════════════════════ -->
+  <section class="order-hero-bg pt-32 pb-20 md:pt-40 md:pb-32 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/30"></div>
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+      <span class="inline-block px-5 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-sm font-medium mb-6 text-white">
+        Start Your Project Today
+      </span>
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-8 text-white">
+        Order Your Custom Website
+      </h1>
+      <p class="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-12">
+        Tell us what you need — we'll build a fast, modern, high-converting website tailored exactly for your business.
+      </p>
+      <div class="flex flex-wrap justify-center gap-5">
+        <a href="#order-form"
+          class="inline-flex items-center gap-3 px-10 py-5 bg-white text-zinc-950 font-semibold text-lg rounded-2xl hover:bg-zinc-100 transition shadow-xl shadow-violet-900/30">
+          Fill the Form <i class="fa-solid fa-arrow-down text-xl"></i>
+        </a>
+        <a href="https://wa.me/917280861089?text=Hi%20NextFable%2C%20I%20want%20to%20order%20a%20website" target="_blank"
+          class="inline-flex items-center gap-3 px-8 py-5 border border-white/30 hover:border-white/70 rounded-2xl text-lg transition text-white">
+          <i class="fa-brands fa-whatsapp text-2xl text-emerald-400"></i>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       ORDER FORM
+       ══════════════════════════════════════ -->
+  <section id="order-form" class="order-section py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="order-card backdrop-blur-md border rounded-3xl p-8 md:p-12 shadow-2xl">
+
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">Project Brief</h2>
+        <p class="text-soft text-center mb-12 max-w-2xl mx-auto">
+          The more details you provide, the faster and more accurate our quote will be.
+          You can always add more information later.
+        </p>
+
+        <form id="orderForm" class="space-y-8">
+
+          <!-- Row 1: Name + Business -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="form-label block text-sm font-medium mb-2">Your Name *</label>
+              <input type="text" name="name" required placeholder="John Doe"
+                class="form-input w-full border rounded-xl px-5 py-4 transition">
+            </div>
+            <div>
+              <label class="form-label block text-sm font-medium mb-2">Business / Brand Name *</label>
+              <input type="text" name="business" required placeholder="Acme Corp"
+                class="form-input w-full border rounded-xl px-5 py-4 transition">
+            </div>
+          </div>
+
+          <!-- Row 2: Email + Phone -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="form-label block text-sm font-medium mb-2">Email Address *</label>
+              <input type="email" name="email" required placeholder="hello@yourbusiness.com"
+                class="form-input w-full border rounded-xl px-5 py-4 transition">
+            </div>
+            <div>
+              <label class="form-label block text-sm font-medium mb-2">Phone Number (with country code) *</label>
+              <input type="tel" name="phone" required placeholder="+91 98765 43210"
+                class="form-input w-full border rounded-xl px-5 py-4 transition">
+            </div>
+          </div>
+
+          <!-- Row 3: Type + Pages -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="form-label block text-sm font-medium mb-2">Website Type *</label>
+              <select name="type" required class="form-input w-full border rounded-xl px-5 py-4 transition">
+                <option value="">Please select...</option>
+                <option value="business">Business / Corporate Website</option>
+                <option value="portfolio">Portfolio / Personal Brand</option>
+                <option value="landing">High-converting Landing Page</option>
+                <option value="ecommerce">E-commerce / Online Store</option>
+                <option value="webapp">Custom Web Application</option>
+                <option value="redesign">Website Redesign</option>
+                <option value="other">Other (please describe below)</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label block text-sm font-medium mb-2">Expected Number of Pages</label>
+              <input type="number" name="pages" min="1" value="5" placeholder="5–10"
+                class="form-input w-full border rounded-xl px-5 py-4 transition">
+            </div>
+          </div>
+
+          <!-- Row 4: Budget + Timeline -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="form-label block text-sm font-medium mb-2">Budget Range (₹) *</label>
+              <select name="budget" required class="form-input w-full border rounded-xl px-5 py-4 transition">
+                <option value="">Select range...</option>
+                <option value="under-15000">Under ₹15,000</option>
+                <option value="15000-30000">₹15,000 – ₹30,000</option>
+                <option value="30000-60000">₹30,000 – ₹60,000</option>
+                <option value="60000-120000">₹60,000 – ₹1,20,000</option>
+                <option value="over-120000">Over ₹1,20,000</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label block text-sm font-medium mb-2">Preferred Timeline</label>
+              <select name="timeline" class="form-input w-full border rounded-xl px-5 py-4 transition">
+                <option value="">Choose one...</option>
+                <option value="asap">As soon as possible (1–3 weeks)</option>
+                <option value="1month">Within 1 month</option>
+                <option value="2month">1–2 months</option>
+                <option value="flexible">Flexible / no rush</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Features checkboxes -->
+          <div>
+            <label class="form-label block text-sm font-medium mb-3">Key Features You Need (select all that apply)</label>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <label class="feature-tile flex items-center gap-3 border rounded-xl p-4 cursor-pointer transition">
+                <input type="checkbox" name="features[]" value="contact-form" class="w-5 h-5 accent-violet-600">
+                <span>Contact Form</span>
+              </label>
+              <label class="feature-tile flex items-center gap-3 border rounded-xl p-4 cursor-pointer transition">
+                <input type="checkbox" name="features[]" value="blog" class="w-5 h-5 accent-violet-600">
+                <span>Blog / Articles</span>
+              </label>
+              <label class="feature-tile flex items-center gap-3 border rounded-xl p-4 cursor-pointer transition">
+                <input type="checkbox" name="features[]" value="booking" class="w-5 h-5 accent-violet-600">
+                <span>Booking / Reservation</span>
+              </label>
+              <label class="feature-tile flex items-center gap-3 border rounded-xl p-4 cursor-pointer transition">
+                <input type="checkbox" name="features[]" value="payment" class="w-5 h-5 accent-violet-600">
+                <span>Payment Gateway</span>
+              </label>
+              <label class="feature-tile flex items-center gap-3 border rounded-xl p-4 cursor-pointer transition">
+                <input type="checkbox" name="features[]" value="admin-panel" class="w-5 h-5 accent-violet-600">
+                <span>Admin Dashboard</span>
+              </label>
+              <label class="feature-tile flex items-center gap-3 border rounded-xl p-4 cursor-pointer transition">
+                <input type="checkbox" name="features[]" value="seo" class="w-5 h-5 accent-violet-600">
+                <span>SEO Optimization</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Project description -->
+          <div>
+            <label class="form-label block text-sm font-medium mb-2">Project Description / Goals *</label>
+            <textarea name="description" rows="6" required
+              placeholder="Tell us about your business, target audience, main goals, preferred colours, reference websites, any must-have features, etc..."
+              class="form-input w-full border rounded-2xl px-5 py-4 transition resize-none"></textarea>
+          </div>
+
+          <!-- Reference websites -->
+          <div>
+            <label class="form-label block text-sm font-medium mb-2">Reference Websites (optional)</label>
+            <textarea name="references" rows="3"
+              placeholder="https://example.com&#10;https://another-site.com&#10;..."
+              class="form-input w-full border rounded-2xl px-5 py-4 transition resize-none"></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="pt-6 text-center">
+            <button type="submit"
+              class="inline-flex items-center gap-3 px-12 py-6 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:brightness-110 text-white font-semibold text-xl rounded-2xl transition shadow-2xl shadow-violet-900/40">
+              Submit Order <i class="fa-solid fa-paper-plane"></i>
+            </button>
+            <p class="submit-note mt-6 text-sm">
+              We usually reply within 2–4 hours during business hours
+            </p>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════ -->
+  <footer class="order-footer border-t py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center gap-x-3 justify-center mb-6">
+        <div class="w-10 h-10 flex items-center justify-center rounded-xl overflow-hidden bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950 shadow-lg shadow-purple-900/30">
+          <img src="72.jpg" alt="NextFable" class="h-[105%] object-contain">
+        </div>
+        <span class="text-2xl font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-fuchsia-200">
+          NextFable
+        </span>
+      </div>
+      <div class="text-center text-white/40 text-sm">
+        <p>© 2026 NextFable. All rights reserved.</p>
+        <p class="mt-2">Made with passion in India</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/917280861089?text=Hi%20NextFable%2C%20I%20just%20filled%20the%20order%20form!" target="_blank"
+    class="fixed bottom-8 right-8 z-50 w-16 h-16 bg-emerald-600 hover:bg-emerald-500 rounded-full flex items-center justify-center shadow-2xl shadow-emerald-900/40 transition hover:scale-110 text-white">
+    <i class="fa-brands fa-whatsapp text-4xl"></i>
+  </a>
+
+
+  <!-- Scripts -->
+  <script src="main.js"></script>
+
+  <script>
+    // Order form → WhatsApp
+    document.getElementById('orderForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const fd = new FormData(this);
+      let msg = '🌟 *New Website Order – NextFable* 🌟\n\n';
+      for (let [k, v] of fd.entries()) {
+        const label = k.replace('[]', '').replace(/_/g, ' ');
+        msg += `*${label.charAt(0).toUpperCase() + label.slice(1)}:* ${v || '—'}\n`;
+      }
+      window.open(`https://wa.me/917280861089?text=${encodeURIComponent(msg)}`, '_blank');
+      alert('Thank you! Your order details have been sent to WhatsApp.\nWe\'ll contact you very soon.');
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>

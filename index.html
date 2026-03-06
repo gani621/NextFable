@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextFable – Modern Website Builder</title>
+
+   <!-- ═══════════════════════════════ TAILWIND CSS ═══════════════════════════════ -->
+  <script>
+    // Must run before Tailwind loads so darkMode:'class' is respected
+    window.tailwind = window.tailwind || {};
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Your stylesheet (dark + light mode vars inside) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('nf_theme');
+      if (t === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+
+<body class="font-['Inter']">
+
+  <!-- ═══════════════════════════════ NAVBAR ═══════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b transition-all duration-300">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="flex items-center justify-between h-20">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-x-3">
+          <div class="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl overflow-hidden bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950 shadow-lg shadow-purple-900/30">
+            <img src="72.jpg" alt="NextFable" class="h-[110%] object-contain">
+          </div>
+          <span class="text-3xl font-semibold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-fuchsia-400">NextFable</span>
+        </div>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-x-10 text-sm font-medium">
+          <a href="#home"     onclick="smoothScrollTo('home')"     class="nav-link active">Home</a>
+          <a href="#services" onclick="smoothScrollTo('services')" class="nav-link">Services</a>
+          <a href="#portfolio"onclick="smoothScrollTo('portfolio')"class="nav-link">Portfolio</a>
+          <a href="#pricing"  onclick="smoothScrollTo('pricing')"  class="nav-link">Pricing</a>
+          <a href="#order"    onclick="smoothScrollTo('order')"    class="nav-link">Order Website</a>
+          <a href="#contact"  onclick="smoothScrollTo('contact')"  class="nav-link">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-x-4">
+          <!-- Theme Toggle -->
+          <button onclick="toggleTheme()" id="theme-toggle" aria-label="Toggle theme"
+            class="w-10 h-10 rounded-2xl flex items-center justify-center transition-all">
+            <i class="fa-solid fa-moon text-xl" id="theme-icon"></i>
+          </button>
+
+          <!-- Get Started -->
+          <a href="#order" onclick="smoothScrollTo('order')"
+            class="btn-get-started px-8 py-3.5 rounded-3xl shadow-2xl">
+            Get Started
+          </a>
+
+          <!-- Hamburger -->
+          <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 flex items-center justify-center text-2xl">
+            <i class="fa-solid fa-bars" id="hamburger"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t py-6 transition-all">
+      <div class="flex flex-col px-6 gap-y-6 text-lg font-medium">
+        <a href="#home"      onclick="toggleMobileMenu();smoothScrollTo('home')"      class="py-2">Home</a>
+        <a href="#services"  onclick="toggleMobileMenu();smoothScrollTo('services')"  class="py-2">Services</a>
+        <a href="#portfolio" onclick="toggleMobileMenu();smoothScrollTo('portfolio')" class="py-2">Portfolio</a>
+        <a href="#pricing"   onclick="toggleMobileMenu();smoothScrollTo('pricing')"   class="py-2">Pricing</a>
+        <a href="#order"     onclick="toggleMobileMenu();smoothScrollTo('order')"     class="py-2">Order Website</a>
+        <a href="#contact"   onclick="toggleMobileMenu();smoothScrollTo('contact')"   class="py-2">Contact</a>
+        <div class="pt-6 border-t border-white/10">
+          <a href="#order" onclick="toggleMobileMenu();smoothScrollTo('order')"
+            class="block w-full py-4 text-center bg-white text-zinc-950 font-semibold rounded-3xl">
+            Get Started Free
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section id="home" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+
+    <!-- Sliding background cards -->
+    <div class="absolute inset-0 pointer-events-none" style="z-index:1">
+      <div class="sliding-cards-wrapper">
+        <div class="sliding-cards">
+          <div class="card"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80" alt="SaaS Dashboard"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1460925898913-fff403f9f3e0?w=800&auto=format&fit=crop&q=80" alt="Business Website"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1551650975-60cb5b56ca4e?w=800&auto=format&fit=crop&q=80" alt="Creative Portfolio"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80" alt="Web App UI"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1555066931-bf19c0fd1085?w=800&auto=format&fit=crop&q=80" alt="Landing Page"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&auto=format&fit=crop&q=80" alt="E-commerce"></div>
+        </div>
+        <!-- duplicate for seamless loop -->
+        <div class="sliding-cards">
+          <div class="card"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80" alt="SaaS Dashboard"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1460925898913-fff403f9f3e0?w=800&auto=format&fit=crop&q=80" alt="Business Website"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1551650975-60cb5b56ca4e?w=800&auto=format&fit=crop&q=80" alt="Creative Portfolio"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80" alt="Web App UI"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1555066931-bf19c0fd1085?w=800&auto=format&fit=crop&q=80" alt="Landing Page"></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&auto=format&fit=crop&q=80" alt="E-commerce"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass overlay -->
+    <div class="hero-glass-overlay"></div>
+
+    <!-- Content -->
+    <div class="max-w-screen-2xl mx-auto px-6 pt-20 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-6 py-2 rounded-3xl bg-white/10 backdrop-blur-md text-sm mb-8 border border-white/20 text-white">
+          <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+          Now accepting orders for March 2026
+        </div>
+
+        <h1 class="text-6xl md:text-8xl font-bold tracking-tighter leading-none mb-6 text-white drop-shadow-2xl">
+          Build Your<br>Digital Presence<br>
+          with <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-violet-200 to-fuchsia-200">NextFable</span>
+        </h1>
+
+        <p class="text-2xl md:text-3xl text-white/90 max-w-3xl mx-auto mb-12 drop-shadow-lg">
+          Fast, modern, and powerful websites for businesses, startups, and creators.<br>
+          No templates. Only custom.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a href="#order" class="group px-12 py-6 bg-white text-2xl font-semibold text-zinc-950 rounded-3xl flex items-center justify-center gap-x-4 hover:shadow-2xl hover:shadow-white/30 transition-all">
+            Order Your Website
+            <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+          </a>
+          <a href="#portfolio" class="px-10 py-6 border border-white/50 hover:border-white rounded-3xl text-xl font-medium flex items-center gap-x-3 transition-all backdrop-blur-sm text-white">
+            <i class="fa-solid fa-play"></i> See the work
+          </a>
+        </div>
+
+        <div class="mt-16 flex flex-wrap justify-center gap-x-10 gap-y-4 text-lg text-white/90">
+          <div class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Delivered in 7 days</div>
+          <div class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> 100% custom design</div>
+          <div class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Free maintenance 30 days</div>
+        </div>
+      </div>
+    </div>
+
+     <!-- ═══════════════════════════════ SCROLL INDICATOR ═══════════════════════════════ -->
+    <div class="scroll-indicator">
+      <span class="scroll-label">SCROLL TO EXPLORE</span>
+      <div class="scroll-line"><div class="scroll-dot"></div></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ SERVICES ═══════════════════════════════ -->
+  <section id="services" class="section-mid py-28">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="px-5 py-2 text-xs tracking-[2px] bg-violet-500/10 text-violet-400 rounded-full">SERVICES</span>
+        <h2 class="text-6xl font-semibold tracking-tighter mt-4">Everything your business needs online</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div onclick="smoothScrollTo('order')" class="service-card group surface surface-soft border rounded-3xl p-8 cursor-pointer">
+          <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-400 text-white rounded-2xl mb-8 text-3xl">💼</div>
+          <h3 class="text-3xl font-semibold mb-3">Business Websites</h3>
+          <p class="text-soft text-lg leading-relaxed mb-8">Professional websites that convert visitors into customers. Built for speed and SEO.</p>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-emerald-400 font-medium">Starting at ₹9,999</span>
+            <span class="group-hover:translate-x-2 transition-transform">Order now →</span>
+          </div>
+        </div>
+
+        <div onclick="smoothScrollTo('order')" class="service-card group surface surface-soft border rounded-3xl p-8 cursor-pointer">
+          <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-pink-500 to-rose-400 text-white rounded-2xl mb-8 text-3xl">📸</div>
+          <h3 class="text-3xl font-semibold mb-3">Portfolio Websites</h3>
+          <p class="text-soft text-lg leading-relaxed mb-8">Stunning personal and creative portfolios that showcase your work beautifully.</p>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-emerald-400 font-medium">Starting at ₹7,999</span>
+            <span class="group-hover:translate-x-2 transition-transform">Order now →</span>
+          </div>
+        </div>
+
+        <div onclick="smoothScrollTo('order')" class="service-card group surface surface-soft border rounded-3xl p-8 cursor-pointer">
+          <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-amber-500 to-orange-400 text-white rounded-2xl mb-8 text-3xl">🚀</div>
+          <h3 class="text-3xl font-semibold mb-3">Landing Pages</h3>
+          <p class="text-soft text-lg leading-relaxed mb-8">High-converting landing pages that turn clicks into leads and sales.</p>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-emerald-400 font-medium">Starting at ₹5,999</span>
+            <span class="group-hover:translate-x-2 transition-transform">Order now →</span>
+          </div>
+        </div>
+
+        <div onclick="smoothScrollTo('order')" class="service-card group surface surface-soft border rounded-3xl p-8 cursor-pointer">
+          <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-teal-500 to-cyan-500 text-white rounded-2xl mb-8 text-3xl">⚙️</div>
+          <h3 class="text-3xl font-semibold mb-3">Custom Web Apps</h3>
+          <p class="text-soft text-lg leading-relaxed mb-8">Powerful web applications tailored exactly to your business workflow.</p>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-emerald-400 font-medium">Starting at ₹29,999</span>
+            <span class="group-hover:translate-x-2 transition-transform">Order now →</span>
+          </div>
+        </div>
+
+        <div onclick="smoothScrollTo('order')" class="service-card group surface surface-soft border rounded-3xl p-8 cursor-pointer">
+          <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-red-500 to-rose-500 text-white rounded-2xl mb-8 text-3xl">🔄</div>
+          <h3 class="text-3xl font-semibold mb-3">Website Redesign</h3>
+          <p class="text-soft text-lg leading-relaxed mb-8">Breathe new life into your old website with modern design and performance.</p>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-emerald-400 font-medium">Starting at ₹14,999</span>
+            <span class="group-hover:translate-x-2 transition-transform">Order now →</span>
+          </div>
+        </div>
+
+        <div onclick="smoothScrollTo('order')" class="service-card group surface surface-soft border rounded-3xl p-8 cursor-pointer">
+          <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-slate-400 to-zinc-300 text-white rounded-2xl mb-8 text-3xl">🛠️</div>
+          <h3 class="text-3xl font-semibold mb-3">Website Maintenance</h3>
+          <p class="text-soft text-lg leading-relaxed mb-8">Ongoing updates, security, speed optimisation &amp; support.</p>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-emerald-400 font-medium">From ₹2,999/mo</span>
+            <span class="group-hover:translate-x-2 transition-transform">Order now →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ HOW IT WORKS ═══════════════════════════════ -->
+  <section class="section-darker py-28">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="grid md:grid-cols-12 gap-16 items-center">
+        <div class="md:col-span-5">
+          <span class="text-xs tracking-widest text-violet-400">4 SIMPLE STEPS</span>
+          <h2 class="text-6xl font-semibold tracking-tighter leading-none mt-4">From idea to launch in under 10 days</h2>
+        </div>
+        <div class="md:col-span-7">
+          <div class="space-y-16">
+            <div class="flex gap-8">
+              <div class="step-box w-14 h-14 flex-shrink-0 rounded-2xl flex items-center justify-center text-3xl font-bold">1</div>
+              <div><h3 class="text-2xl font-semibold mb-3">Choose Your Service</h3><p class="text-soft">Tell us what you need — business site, portfolio, landing page, or full app.</p></div>
+            </div>
+            <div class="flex gap-8">
+              <div class="step-box w-14 h-14 flex-shrink-0 rounded-2xl flex items-center justify-center text-3xl font-bold">2</div>
+              <div><h3 class="text-2xl font-semibold mb-3">Submit Your Brief</h3><p class="text-soft">Fill the quick order form. Share references, colours, and your vision.</p></div>
+            </div>
+            <div class="flex gap-8">
+              <div class="step-box w-14 h-14 flex-shrink-0 rounded-2xl flex items-center justify-center text-3xl font-bold">3</div>
+              <div><h3 class="text-2xl font-semibold mb-3">We Design &amp; Build</h3><p class="text-soft">Our team designs, develops, and iterates with you in real-time.</p></div>
+            </div>
+            <div class="flex gap-8">
+              <div class="step-box w-14 h-14 flex-shrink-0 rounded-2xl flex items-center justify-center text-3xl font-bold">4</div>
+              <div><h3 class="text-2xl font-semibold mb-3">Delivery &amp; Launch</h3><p class="text-soft">We hand over the live website, train you, and give 30 days free support.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ PORTFOLIO ═══════════════════════════════ -->
+  <section id="portfolio" class="section-mid py-28">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="flex justify-between items-end mb-12">
+        <div>
+          <span class="text-violet-400 text-sm tracking-widest">RECENT WORK</span>
+          <h2 class="text-6xl font-semibold tracking-tighter">Real websites. Real results.</h2>
+        </div>
+        <a href="ViewAllProjects.html" class="hidden md:flex items-center gap-x-3 text-lg group">
+          View all projects
+          <span class="block w-8 h-px bg-current group-hover:w-12 transition-all"></span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="project-card group surface rounded-3xl overflow-hidden">
+          <div class="aspect-video bg-zinc-700 relative">
+            <img src="https://picsum.photos/id/1015/800/600" alt="Business Website" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute top-4 right-4 px-4 py-1 bg-black/70 text-white text-xs rounded-full">Business</div>
+          </div>
+          <div class="p-8">
+            <h4 class="font-semibold text-2xl">NovaTech Solutions</h4>
+            <p class="text-soft mt-2">Modern SaaS landing page that increased conversions by 340%</p>
+            <button onclick="window.open('https://picsum.photos/id/1015/800/600','_blank')" class="mt-8 text-sm flex items-center gap-x-2 text-violet-400 hover:text-violet-300">
+              View live demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="project-card group surface rounded-3xl overflow-hidden">
+          <div class="aspect-video bg-zinc-700 relative">
+            <img src="https://picsum.photos/id/201/800/600" alt="Restaurant" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute top-4 right-4 px-4 py-1 bg-black/70 text-white text-xs rounded-full">Restaurant</div>
+          </div>
+          <div class="p-8">
+            <h4 class="font-semibold text-2xl">Spice Palace</h4>
+            <p class="text-soft mt-2">Elegant restaurant website with online ordering system</p>
+            <button onclick="window.open('https://picsum.photos/id/201/800/600','_blank')" class="mt-8 text-sm flex items-center gap-x-2 text-violet-400 hover:text-violet-300">
+              View live demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="project-card group surface rounded-3xl overflow-hidden">
+          <div class="aspect-video bg-zinc-700 relative">
+            <img src="https://picsum.photos/id/29/800/600" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute top-4 right-4 px-4 py-1 bg-black/70 text-white text-xs rounded-full">Wedding</div>
+          </div>
+          <div class="p-8">
+            <h4 class="font-semibold text-2xl">Aarohi &amp; Vihaan</h4>
+            <p class="text-soft mt-2">Beautiful wedding website with RSVP and gallery</p>
+            <button onclick="window.open('https://picsum.photos/id/29/800/600','_blank')" class="mt-8 text-sm flex items-center gap-x-2 text-violet-400 hover:text-violet-300">
+              View live demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ PRICING ═══════════════════════════════ -->
+  <section id="pricing" class="section-darker py-28">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-6xl font-semibold tracking-tighter">Simple, transparent pricing</h2>
+        <p class="text-2xl text-soft mt-4">Pick a plan. Launch in days.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Starter -->
+        <div class="pricing-card surface border rounded-3xl p-10">
+          <div class="text-sm font-medium text-muted mb-2">STARTER</div>
+          <div class="flex items-baseline gap-x-2">
+            <span class="text-6xl font-semibold">₹9,999</span>
+            <span class="text-muted">one-time</span>
+          </div>
+          <ul class="mt-10 space-y-5 text-lg">
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> 1–5 pages</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Responsive design</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Contact form</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Basic SEO</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> 30 days support</li>
+          </ul>
+          <button onclick="smoothScrollTo('order')" class="mt-12 w-full py-6 bg-white text-zinc-950 font-semibold rounded-3xl text-xl">Get Basic Plan</button>
+        </div>
+
+        <!-- Growth (popular) -->
+        <div class="bg-gradient-to-b from-violet-600 to-fuchsia-600 rounded-3xl p-10 relative scale-110 shadow-2xl">
+          <div class="absolute -top-5 right-8 bg-white text-zinc-950 text-xs font-bold px-6 py-2 rounded-3xl">MOST POPULAR</div>
+          <div class="text-sm font-medium text-white/80 mb-2">GROWTH</div>
+          <div class="flex items-baseline gap-x-2">
+            <span class="text-6xl font-semibold text-white">₹24,999</span>
+            <span class="text-white/70">one-time</span>
+          </div>
+          <ul class="mt-10 space-y-5 text-lg text-white">
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check"></i> 5–10 pages</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check"></i> Custom UI/UX</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check"></i> Admin dashboard</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check"></i> Advanced SEO</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check"></i> 90 days support</li>
+          </ul>
+          <button onclick="smoothScrollTo('order')" class="mt-12 w-full py-6 bg-white text-violet-600 font-semibold rounded-3xl text-xl shadow-inner">Choose Standard</button>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card surface border rounded-3xl p-10">
+          <div class="text-sm font-medium text-muted mb-2">PREMIUM</div>
+          <div class="flex items-baseline gap-x-2">
+            <span class="text-6xl font-semibold">₹49,999</span>
+            <span class="text-muted">one-time</span>
+          </div>
+          <ul class="mt-10 space-y-5 text-lg">
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Unlimited pages</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Full custom animations</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> User dashboard</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> E-commerce ready</li>
+            <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> 1 Year updates</li>
+          </ul>
+          <button onclick="smoothScrollTo('order')" class="mt-12 w-full py-6 bg-white text-zinc-950 font-semibold rounded-3xl text-xl">Go Premium</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ CTA BANNER ═══════════════════════════════ -->
+  <section class="py-28 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600">
+    <div class="max-w-screen-2xl mx-auto px-6 text-center">
+      <h2 class="text-6xl font-semibold tracking-tighter text-white">Ready to build your dream website?</h2>
+      <p class="text-3xl text-white/80 mt-6 max-w-xl mx-auto">Join 240+ businesses that launched with NextFable this month.</p>
+      <div class="flex flex-wrap gap-6 justify-center mt-12">
+        <a href="#order" onclick="smoothScrollTo('order')"
+          class="px-16 py-8 bg-white text-3xl font-semibold text-zinc-950 rounded-3xl flex items-center gap-x-4 hover:scale-105 transition">
+          Order Now – Takes 2 minutes
+        </a>
+        <a href="https://wa.me/917280861089" target="_blank"
+          class="px-10 py-8 border-2 border-white/80 hover:border-white text-2xl font-medium rounded-3xl flex items-center gap-x-3 text-white">
+          <i class="fa-brands fa-whatsapp text-4xl"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ ORDER FORM ═══════════════════════════════ -->
+  <section id="order" class="section-dark py-28">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-xs font-mono tracking-widest bg-emerald-500/10 text-emerald-400 px-5 py-2 rounded-3xl">INSTANT QUOTE</span>
+        <h2 class="text-6xl font-semibold tracking-tighter mt-6">Tell us about your project</h2>
+      </div>
+
+      <form id="orderForm" class="order-form-card space-y-8 border rounded-3xl p-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <label class="block text-sm mb-2 text-soft">Your Name</label>
+            <input id="name" type="text" required placeholder="Rahul Sharma" class="w-full border rounded-2xl px-6 py-5">
+          </div>
+          <div>
+            <label class="block text-sm mb-2 text-soft">Business Name</label>
+            <input id="business" type="text" required placeholder="My Startup" class="w-full border rounded-2xl px-6 py-5">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <label class="block text-sm mb-2 text-soft">Email Address</label>
+            <input id="email" type="email" required placeholder="hello@mybusiness.com" class="w-full border rounded-2xl px-6 py-5">
+          </div>
+          <div>
+            <label class="block text-sm mb-2 text-soft">Phone Number</label>
+            <input id="phone" type="tel" required placeholder="+91 98765 43210" class="w-full border rounded-2xl px-6 py-5">
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm mb-2 text-soft">Website Type</label>
+          <select id="type" required class="w-full border rounded-2xl px-6 py-5">
+            <option value="">Select type...</option>
+            <option>Invitation Card Website</option>
+            <option>Business Website</option>
+            <option>Portfolio Website</option>
+            <option>Landing Page</option>
+            <option>Custom Web Application</option>
+            <option>Restaurant / Cafe</option>
+            <option>E-commerce Store</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <label class="block text-sm mb-2 text-soft">Number of Pages</label>
+            <input id="pages" type="number" value="2" class="w-full border rounded-2xl px-6 py-5">
+          </div>
+          <div>
+            <label class="block text-sm mb-2 text-soft">Budget Range (₹)</label>
+            <select id="budget" class="w-full border rounded-2xl px-6 py-5">
+              <option>Under ₹5,000</option>
+              <option>₹5,000 – ₹10,000</option>
+              <option selected>₹10,000 – ₹30,000</option>
+              <option>₹30,000 – ₹60,000</option>
+              <option>Above ₹60,000</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm mb-2 text-soft">Key Features Needed (optional)</label>
+          <textarea id="features" rows="3" placeholder="Online booking, blog, payment gateway, etc." class="w-full border rounded-3xl px-6 py-5 resize-none"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm mb-2 text-soft">Project Description</label>
+          <textarea id="description" rows="5" required placeholder="Tell us about your business and vision..." class="w-full border rounded-3xl px-6 py-5 resize-none"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full py-8 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white text-2xl font-semibold rounded-3xl hover:brightness-110 transition">
+          Submit Order – Get Quote in 60 seconds
+        </button>
+        <div onclick="openWhatsAppChat()" class="flex items-center justify-center gap-x-3 text-soft hover:text-violet-400 cursor-pointer transition py-4">
+          <i class="fa-brands fa-whatsapp text-3xl"></i>
+          <span class="text-lg">Or chat directly on WhatsApp</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ CONTACT ═══════════════════════════════ -->
+  <section id="contact" class="section-mid py-28">
+    <div class="max-w-screen-2xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+      <div>
+        <h2 class="text-6xl font-semibold tracking-tighter">Let's build something legendary together</h2>
+        <div class="mt-12 space-y-8">
+          <div class="flex gap-6">
+            <i class="fa-solid fa-envelope text-4xl mt-1 text-violet-400"></i>
+            <div>
+              <div class="font-medium">hello@nextfable.com</div>
+              <div class="text-soft">We reply within 2 hours</div>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <i class="fa-solid fa-phone text-4xl mt-1 text-violet-400"></i>
+            <div>
+              <div class="font-medium">+91 72808 61089</div>
+              <div class="text-soft">Mon–Sat, 9am–7pm IST</div>
+            </div>
+          </div>
+        </div>
+        <button onclick="openWhatsAppChat()"
+          class="mt-16 flex items-center gap-x-5 bg-emerald-600 hover:bg-emerald-500 transition px-10 py-6 rounded-3xl text-2xl text-white">
+          <i class="fa-brands fa-whatsapp text-5xl"></i>
+          <div>
+            <div class="font-semibold">Chat on WhatsApp</div>
+            <div class="text-sm opacity-75">Instant response • Free quote</div>
+          </div>
+        </button>
+      </div>
+
+      <div class="hidden md:block rounded-3xl overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-950 to-blue-950 relative h-[500px] shadow-2xl">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+        <div class="absolute inset-0 opacity-30"
+          style="background-image: radial-gradient(circle at 25% 25%, rgba(168,85,247,0.12) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(59,130,246,0.12) 2px, transparent 2px); background-size: 40px 40px;">
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center text-white/20 text-9xl font-bold tracking-widest select-none">NEXT FABLE</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="border-t py-20">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between gap-y-12">
+        <div>
+          <div class="flex items-center gap-x-3">
+            <div class="w-10 h-10 flex items-center justify-center rounded-xl overflow-hidden bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950">
+              <img src="72.jpg" alt="NextFable" class="h-[105%] object-contain">
+            </div>
+            <span class="text-3xl font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-fuchsia-200">NextFable</span>
+          </div>
+          <p class="text-white/40 mt-6 max-w-xs">Premium websites for ambitious founders and growing businesses.</p>
+          <div class="flex gap-x-6 mt-12 text-3xl">
+   <!-- ═══════════════════════════════ SOCIAL HANDLE ═══════════════════════════════ -->          
+            <a href="https://www.instagram.com/nextfable?igsh=MTJueDFkMzd6MjNidA==" target="_blank" class="text-white/40 hover:text-violet-400 transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="text-white/40 hover:text-violet-400 transition"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="text-white/40 hover:text-violet-400 transition"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+ <!-- ═══════════════════════════════ PLATFORM/ COMPANY / LEGAL ═══════════════════════════════ -->
+        <div class="grid grid-cols-3 gap-x-16 text-white/55">
+          <div>
+            <div class="text-xs font-medium tracking-widest mb-6 text-white/30">PLATFORM</div>
+            <div class="space-y-4 text-sm">
+              <a href="#home" class="block hover:text-white transition">Home</a>
+              <a href="#services" class="block hover:text-white transition">Services</a>
+              <a href="#portfolio" class="block hover:text-white transition">Portfolio</a>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs font-medium tracking-widest mb-6 text-white/30">COMPANY</div>
+            <div class="space-y-4 text-sm">
+              <a href="#" class="block hover:text-white transition">About</a>
+              <a href="#" class="block hover:text-white transition">Blog</a>
+              <a href="#" class="block hover:text-white transition">Careers</a>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs font-medium tracking-widest mb-6 text-white/30">LEGAL</div>
+            <div class="space-y-4 text-sm">
+              <a href="#" class="block hover:text-white transition">Privacy</a>
+              <a href="#" class="block hover:text-white transition">Terms</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-xs text-white/30 mt-24">© 2026 NextFable. All rights reserved.</div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════ FLOATING WHATSAPP ═══════ -->
+  <a href="https://wa.me/917280861089" target="_blank"
+    class="fixed bottom-8 right-8 w-16 h-16 bg-emerald-500 hover:bg-emerald-400 rounded-3xl flex items-center justify-center shadow-2xl shadow-emerald-600/50 transition-all hover:scale-110 z-50 text-white">
+    <i class="fa-brands fa-whatsapp text-4xl"></i>
+  </a>
+
+
+  <!-- ═══════ SCRIPTS ═══════ -->
+  <script src="main.js"></script>
+
+</body>
+</html>
